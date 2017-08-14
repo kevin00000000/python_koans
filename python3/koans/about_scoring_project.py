@@ -34,7 +34,32 @@ from runner.koan import *
 
 def score(dice):
     # You need to write this method
-    pass
+    cacl = 0
+    init = dict.fromkeys(range(1, 7), 0)
+    result = {}
+    for index in dice:
+        if index in result.keys():
+            result[index]+=1
+        else:
+            result[index] = 1
+    for i in init.keys():
+        if i in result.keys():
+            if i==1:
+                if result[i]>=3:
+                    cacl += 1000
+                    cacl += (result[i]-3)*100
+                else:
+                    cacl += result[i]*100
+            elif i==5:
+                if result[i]>=3:
+                    cacl += 500
+                    cacl += (result[i]-3)*50
+                else:
+                    cacl += result[i]*50
+            else:
+                if result[i]>=3:
+                    cacl += i*100
+    return cacl
 
 class AboutScoringProject(Koan):
     def test_score_of_an_empty_list_is_zero(self):
